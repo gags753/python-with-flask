@@ -5,25 +5,30 @@ from .links_repository import LinksRepository
 
 db_connection_handler.connect()
 trip_id = str(uuid.uuid4())
+link_id = str(uuid.uuid4())
 
-# @pytest.mark.skip(reason="interacao com o banco")
-def test_create_link_to_trip():
+@pytest.mark.skip(reason="interacao com o banco")
+def test_register_link():
   conn = db_connection_handler.get_connection()
   links_repository = LinksRepository(conn)
 
   links_infos = {
-    "id": str(uuid.uuid4()),
+    "id": link_id,
     "trip_id": trip_id,
-    "link": "https://www.google.com/"
+    "link": "https://www.google.com/",
+    "title": "airbnb"
   }
 
-  links_repository.create_link_to_trip(links_infos)
+  links_repository.register_link(links_infos)
 
-# @pytest.mark.skip(reason="interacao com o banco")
+@pytest.mark.skip(reason="interacao com o banco")
 def test_find_email_from_trip():
   conn = db_connection_handler.get_connection()
   links_repository = LinksRepository(conn)
 
   links = links_repository.find_links_of_trip(trip_id)
+
+  assert isinstance(links, list)
+  assert isinstance(links[0], tuple)
   print()
   print(links)

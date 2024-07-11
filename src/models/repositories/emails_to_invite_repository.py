@@ -28,8 +28,8 @@ class EmailsToInviteRepository:
         SELECT * FROM emails_to_invite WHERE trip_id = ?
       ''', (trip_id,)
     )
-    email_to_invite = cursor.fetchmany()
-    return email_to_invite
+    email_to_invites = cursor.fetchmany()
+    return email_to_invites
   
   # def update_trip_status(self, trip_id: str) -> None:
   #   cursor = self.__conn.cursor()
