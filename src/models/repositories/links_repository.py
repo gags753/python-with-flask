@@ -29,5 +29,5 @@ class LinksRepository:
         SELECT * FROM links WHERE trip_id = ?
       ''', (trip_id,)
     )
-    links = cursor.fetchmany()
+    links = cursor.fetchall()
     return links
