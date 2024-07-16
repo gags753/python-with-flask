@@ -1,4 +1,5 @@
 from flask import jsonify, Blueprint, request
+from pydantic import ValidationError
 
 # Importação de controllers
 from src.controllers.trip_creator import TripCreator
@@ -14,6 +15,9 @@ from src.controllers.activity_finder import ActivityFinder
 
 from src.controllers.link_creator import LinkCreator
 from src.controllers.link_finder import LinkFinder
+
+# Importando requests
+from src.main.requests.create_trip_request import CreateTripRequest
 
 # Imortação de repositórios
 from src.models.repositories.trips_repository import TripsRepository
@@ -34,9 +38,13 @@ def create_trip():
   emails_repository = EmailsToInviteRepository(conn)
   controller = TripCreator(trips_repository, emails_repository)
 
-  response = controller.create(request.json)
+  try:
+    data = CreateTripRequest(**request.json).model_dump()
+    response = controller.create(data)
 
-  return jsonify(response["body"]), response["status_code"]
+    return jsonify(response["body"]), response["status_code"]
+  except ValidationError as err:
+    return jsonify(err.errors()), 400
 
 @trips_routes_bp.route("/trips/<tripId>", methods=["GET"])
 def find_trip_by_id(tripId: str):
