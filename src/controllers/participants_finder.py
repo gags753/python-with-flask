@@ -1,7 +1,8 @@
 from typing import Dict
+from src.models.repositories.participants_repository import ParticipantsRepository
 
 class ParticipantFinder:
-  def __init__(self, participants_repository, emails_repository) -> None:
+  def __init__(self, participants_repository: ParticipantsRepository) -> None:
     self.__participants_repository = participants_repository
 
   def find_participants_from_trip(self, trip_id: str) -> Dict:

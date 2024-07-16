@@ -1,11 +1,12 @@
 from typing import Dict
 import uuid
+from src.models.repositories.links_repository import LinksRepository
 
 class LinkCreator:
-  def __init__(self, link_repository) -> None:
+  def __init__(self, link_repository: LinksRepository) -> None:
     self.__link_repository = link_repository
 
-  def create(self, body, trip_id) -> Dict:
+  def create(self, body, trip_id: str) -> Dict:
     try:
       link_id = str(uuid.uuid4())
       link_infos = {

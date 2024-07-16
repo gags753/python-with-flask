@@ -1,11 +1,11 @@
 import uuid
-from typing import Dict
+from src.models.repositories.activities_repository import ActivitiesRepository
 
 class ActivityCreator:
-  def __init__(self, activities_repository) -> None:
+  def __init__(self, activities_repository: ActivitiesRepository) -> None:
     self.__activities_repository = activities_repository
 
-  def create(self, body, trip_id) -> None:
+  def create(self, body, trip_id: str) -> None:
     try:
       id = str(uuid.uuid4())
       activities_infos = {

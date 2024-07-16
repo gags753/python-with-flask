@@ -1,11 +1,10 @@
-from typing import Dict, List, Tuple
-import uuid
+from src.models.repositories.links_repository import LinksRepository
 
 class LinkFinder:
-  def __init__(self, link_repository) -> None:
+  def __init__(self, link_repository: LinksRepository) -> None:
     self.__link_repository = link_repository
 
-  def find(self, tripId):
+  def find(self, tripId: str):
     try:
       links = self.__link_repository.find_links_of_trip(tripId)
 

@@ -1,12 +1,14 @@
 import uuid
 from typing import Dict
+from src.models.repositories.participants_repository import ParticipantsRepository
+from src.models.repositories.emails_to_invite_repository import EmailsToInviteRepository
 
 class ParticipantCreator:
-  def __init__(self, participants_repository, emails_repository) -> None:
+  def __init__(self, participants_repository: ParticipantsRepository, emails_repository: EmailsToInviteRepository) -> None:
     self.__participants_repository = participants_repository
     self.__emails_repository = emails_repository
 
-  def create(self, body, trip_id) -> Dict:
+  def create(self, body, trip_id: str) -> Dict:
     try:
       participant_id = str(uuid.uuid4())
       email_id = str(uuid.uuid4())

@@ -1,10 +1,11 @@
 from typing import Dict
+from src.models.repositories.activities_repository import ActivitiesRepository
 
 class ActivityFinder:
-  def __init__(self, activities_repository) -> None:
+  def __init__(self, activities_repository: ActivitiesRepository) -> None:
     self.__activities_repository = activities_repository
 
-  def find_from_trip(self, trip_id) -> Dict:
+  def find_from_trip(self, trip_id: str) -> Dict:
     try:
       activities = self.__activities_repository.find_activities_from_trip(trip_id)
 

@@ -1,9 +1,11 @@
 from typing import Dict
 from src.drivers.email_sender import send_email
 import uuid
+from src.models.repositories.trips_repository import TripsRepository
+from src.models.repositories.emails_to_invite_repository import EmailsToInviteRepository
 
 class TripCreator:
-  def __init__(self, trip_repository, emails_repository) -> None:
+  def __init__(self, trip_repository: TripsRepository, emails_repository: EmailsToInviteRepository) -> None:
     self.__trip_repository = trip_repository
     self.__emails_repository = emails_repository
 
